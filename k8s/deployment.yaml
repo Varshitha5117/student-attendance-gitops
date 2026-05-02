@@ -17,7 +17,7 @@ spec:
       containers:
       - name: attendance-app
         # This image tag is dynamically updated by GitHub Actions using sed
-        image: YOUR_DOCKERHUB_USERNAME/attendance-app:latest
+        image: varshitha5117/attendance-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
