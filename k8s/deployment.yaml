@@ -17,7 +17,7 @@ spec:
       containers:
       - name: attendance-app
         # This image tag is dynamically updated by GitHub Actions using sed
-        image: varshitha5117/attendance-app:latest
+        image: ghcr.io/varshitha5117/student-attendance-gitops:e6035a1cbb54ff6738990f7902b75cc986039776
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
