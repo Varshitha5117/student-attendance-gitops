@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attendance-app
+  labels:
+    app: attendance
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: attendance
+  template:
+    metadata:
+      labels:
+        app: attendance
+    spec:
+      containers:
+      - name: attendance-app
+        # This image tag is dynamically updated by GitHub Actions using sed
+        image: YOUR_DOCKERHUB_USERNAME/attendance-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://attendance_user:attendance_pass@postgres-service:5432/attendance_db"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
